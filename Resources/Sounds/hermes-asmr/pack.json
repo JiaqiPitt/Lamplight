@@ -1,0 +1,153 @@
+{
+  "credit" : "Recorded by Joseph Sardin, BigSoundBank.com — CC0",
+  "hasKeyTravel" : true,
+  "id" : "hermes-asmr",
+  "machine" : "Hermes Precisa 305",
+  "name" : "Hermes · ASMR",
+  "sounds" : {
+    "back" : [
+      {
+        "file" : "back-01.wav"
+      },
+      {
+        "file" : "back-02.wav"
+      },
+      {
+        "file" : "back-03.wav"
+      }
+    ],
+    "bell" : [
+      {
+        "file" : "bell-01.wav"
+      },
+      {
+        "file" : "bell-02.wav"
+      }
+    ],
+    "carriage0" : [
+      {
+        "file" : "carriage0-01.wav"
+      },
+      {
+        "file" : "carriage0-02.wav"
+      }
+    ],
+    "carriage1" : [
+      {
+        "file" : "carriage1-01.wav"
+      },
+      {
+        "file" : "carriage1-02.wav"
+      }
+    ],
+    "carriage2" : [
+      {
+        "file" : "carriage2-01.wav"
+      },
+      {
+        "file" : "carriage2-02.wav"
+      }
+    ],
+    "carriage3" : [
+      {
+        "file" : "carriage3-01.wav"
+      },
+      {
+        "file" : "carriage3-02.wav"
+      }
+    ],
+    "feed" : [
+      {
+        "file" : "feed-01.wav"
+      }
+    ],
+    "paperIn" : [
+      {
+        "file" : "paperIn-01.wav"
+      }
+    ],
+    "paperOut" : [
+      {
+        "file" : "paperOut-01.wav"
+      }
+    ],
+    "space" : [
+      {
+        "file" : "space-01.wav"
+      },
+      {
+        "file" : "space-02.wav"
+      },
+      {
+        "file" : "space-03.wav"
+      }
+    ],
+    "strike" : [
+      {
+        "file" : "strike-01.wav"
+      },
+      {
+        "file" : "strike-02.wav"
+      },
+      {
+        "file" : "strike-03.wav"
+      },
+      {
+        "file" : "strike-04.wav"
+      },
+      {
+        "file" : "strike-05.wav"
+      },
+      {
+        "file" : "strike-06.wav"
+      },
+      {
+        "file" : "strike-07.wav"
+      },
+      {
+        "file" : "strike-08.wav"
+      },
+      {
+        "file" : "strike-09.wav"
+      },
+      {
+        "file" : "strike-10.wav"
+      },
+      {
+        "file" : "strike-11.wav"
+      },
+      {
+        "file" : "strike-12.wav"
+      },
+      {
+        "file" : "strike-13.wav"
+      },
+      {
+        "file" : "strike-14.wav"
+      },
+      {
+        "file" : "strike-15.wav"
+      },
+      {
+        "file" : "strike-16.wav"
+      },
+      {
+        "file" : "strike-17.wav"
+      },
+      {
+        "file" : "strike-18.wav"
+      }
+    ],
+    "tape" : [
+      {
+        "file" : "tape-01.wav"
+      }
+    ],
+    "tick" : [
+      {
+        "file" : "tick-01.wav"
+      }
+    ]
+  },
+  "strikeLead" : 0.046
+}
