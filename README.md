@@ -1,32 +1,41 @@
 # Lamplight
 
 <p align="center">
-  <img src="docs/demo.webp" alt="Lamplight：关着灯，在打字头的一盏小灯下打字" width="100%">
+  <img src="docs/demo.webp" alt="Lamplight: typing in the dark by the light of one small lamp on the carriage" width="100%">
 </p>
 
 <p align="center">
-  <a href="docs/demo.mp4">▶ 带声音的同一段演示（MP4，18 秒）</a>　打字机的声音是这个 App 的一半
+  <a href="docs/demo.mp4">▶ The same film with sound (MP4, 18 seconds)</a> — the sound of the machine is half of this app
 </p>
 
-一台关了灯才用的打字机。屏幕是黑的，只有打字头上的一盏小灯照着纸；每按一个键，
-一根字杆从下面挥上来敲在纸上，留下一个带墨迹毛边的字。用来写每天的日记、读书笔记和随笔。
+A typewriter for writing with the lights off. The screen is dark; one small lamp on the carriage
+lights the paper. Every key you press sends a typebar swinging up to strike the page, and leaves a
+letter with ink bleeding at its edges. It is for a daily diary, reading notes and essays.
 
-原生 Mac 应用：Swift + SpriteKit（底层是 Metal），画面全部由显卡绘制。画面里的所有图像都是
-程序启动时画出来的，没有图片文件；声音来自真实打字机的录音。写下的东西只存在这台 Mac 上，不联网。
+It is a native Mac app: Swift and SpriteKit, with Metal underneath. Every image in it is drawn by
+the program when it starts — there are no image files — and the sounds are recordings of real
+typewriters. What you write stays on your Mac; nothing goes online.
 
-上面的演示是程序自己离屏渲染出来的：近景是镜头推近（App 里没有缩放），其余和 App 里看到、听到的一样。
-整个窗口是这个样子：
+The film above was rendered offscreen by the app itself. The close views are a camera moving in
+(the app does not zoom); everything else is what you see and hear in the app. This is the whole
+window:
 
-![整个窗口：黑的房间、被灯照亮的纸和打字头](docs/preview.png)
+![The whole window: a dark room, the paper lit by the lamp, and the carriage](docs/preview.png)
 
-一次敲击，逐帧看：
+One keystroke, frame by frame:
 
-![一根字杆挥上来、敲在纸上、落回去的十二帧](docs/keystroke.png)
+![Twelve frames of a typebar swinging up, striking the paper and falling back](docs/keystroke.png)
 
-## 构建和运行
+## Build and run
 
-需要一台 Mac（macOS 14 或更新）和 Xcode 命令行工具（`xcode-select --install`），不需要完整的 Xcode。
-克隆这个仓库后，在项目文件夹里：
+You need a Mac running macOS 14 or later and the Xcode Command Line Tools
+(`xcode-select --install`). Full Xcode is not required.
+
+```bash
+git clone https://github.com/JiaqiPitt/Lamplight.git
+```
+
+Then, in the project folder:
 
 ```bash
 ./scripts/build.sh
@@ -36,233 +45,283 @@
 open build/Lamplight.app
 ```
 
-构建出的 App 只做了本机签名，在自己的 Mac 上可以直接打开。
-这个项目是在 macOS 27、Swift 6.4 上构建和测试的，更早的系统没有验证过。
+The app is signed ad hoc, which is enough to run it on the Mac that built it. The project was
+built and tested on macOS 27 with Swift 6.4; earlier systems have not been tried.
 
-## 怎么用
+## Using it
 
-打开就是今天的日记，机器会自己把日期（英文，如 Tuesday, November 17, 2026）打在纸的顶上，之后直接打字。
-界面是英文的。
+It opens on today's diary. The machine types the date at the top of the sheet by itself
+(Tuesday, November 17, 2026, for example), and after that you just type.
 
-| 操作 | 效果 |
+| Do this | What happens |
 |---|---|
-| 打字 | 字杆敲击，打字头右移一格。中文、日文等输入法也能用：拼音淡淡地显示在纸上，每按一键有一声轻响，上屏时才真正敲出来 |
-| Return | 滑架回到行首，纸上卷一行 |
-| 写到接近行尾 | 铃响一声；写满后自动换行（可在设置里关掉） |
-| Delete | 修正带把上一个字揭掉，留下的淡痕在 10 秒内完全消失（设置里的 Delete 可换成 Strike out 或 Overtype） |
-| Tab | 前进到下一个 4 格位置 |
-| ← → ↑ ↓ | 挪动打字头、上下卷纸，可以回到任何位置补打 |
-| 按住打字头拖动 | 打字头跟着鼠标沿这一行平滑移动，松手落在最近的一格。指针移到打字头上会变成手形（“纸走”模式下拖的是纸，这一行的纸面上也能抓） |
-| 按住 ⌃F / ⌃J | 打字头向左 / 向右快速滑行：约 0.7 秒走完一整行，松开后减速停在一格上；轻点一下大约走一个词。滑行中按任何字键，就在当时的位置打字 |
-| 滚动 | 把纸卷回去看前面写的，再打字时自动回到原处 |
-| 鼠标移到纸上 | 指针带着一小片光，用来看灯照不到的地方 |
-| 鼠标停住 6 秒 | 指针和它带的那片光一起隐去，一动鼠标就回来；按任何键也会立刻隐去（抽屉、设置开着或指针停在工具栏上时不隐） |
-| 移动鼠标 | 底部出现工具栏，开始打字后自动隐去 |
-| 切换输入法 | 打字头上短暂亮起 A / 中 / あ 等标记，平时打字头上没有任何文字 |
+| Type | A typebar strikes and the carriage moves one cell to the right. Chinese, Japanese and other input methods work too: what you are composing is pencilled in on the paper, each key gives a soft click, and the characters are struck when you commit them |
+| Return | The carriage flies back to the margin and the paper feeds up one line |
+| Reach the end of a line | The bell rings a few cells before the end; at the end the line wraps by itself (this can be turned off in the settings) |
+| Delete | Correction tape lifts the last character. The faint trace it leaves is gone within 10 seconds. (Delete can be set to Strike out or Overtype instead) |
+| Tab | Moves to the next stop, every 4 cells |
+| ← → ↑ ↓ | Move the carriage and roll the paper, to go back and type anywhere on the sheet |
+| Drag the carriage | It follows the pointer smoothly along the line and drops into the nearest cell when you let go. The pointer turns into a hand over the carriage. (With Travel set to Paper moves it is the paper you drag, and you can take hold of it anywhere along the line) |
+| Hold ⌃F / ⌃J | The carriage glides left / right: about 0.7 seconds across a whole line, braking to stop on a cell when you let go. A tap moves it about a word. Any key typed during a glide lands where the carriage is at that moment |
+| Scroll | Rolls the paper back to read what came before; it returns when you type again |
+| Move the pointer over the paper | It carries a small light of its own, for reading where the lamp does not reach |
+| Leave the pointer still for 6 seconds | It disappears, and its light with it; moving the mouse brings both back. Any key hides them at once. (They stay while the drawer or the settings are open, or the pointer rests on the toolbar) |
+| Move the pointer | The toolbar appears at the bottom, and hides again when you start typing |
+| Switch input source | A one-character mark for the new input source lights briefly on the carriage (A for English; a Chinese or Japanese character for those input methods). Otherwise the carriage shows no text at all |
 
-### 快捷键
+### Shortcuts
 
-| 按键 | 作用 |
+| Key | Action |
 |---|---|
-| ⌘T | 今天的日记 |
-| ⌘N | 新随笔 |
-| ⇧⌘N | 新读书笔记 |
-| ⌘O | 打开抽屉（所有写过的稿纸） |
-| ⌘R | 换色带：黑 / 红（读书笔记里可以用红色抄原文、黑色写感想） |
-| ⌘L | 开灯 / 关灯 |
-| ⌘D | 打上现在的时间 |
-| ⌘E | 导出为文本文件 |
-| ⇧⌘C | 拷贝全文 |
-| ⇧⌘M | 声音开 / 关 |
-| ⌃⌘F | 全屏 |
-| ⌃F / ⌃J（按住） | 打字头向左 / 向右滑行 |
+| ⌘T | Today's diary |
+| ⌘N | New essay |
+| ⇧⌘N | New reading note |
+| ⌘O | Open the drawer (every sheet you have written) |
+| ⌘R | Switch ribbon: black / red (in reading notes, red for quotations and black for your own thoughts) |
+| ⌘L | Lights on / off |
+| ⌘D | Type the current time |
+| ⌘E | Export as a text file |
+| ⇧⌘C | Copy all the text |
+| ⇧⌘M | Sound on / off |
+| ⌃⌘F | Full screen |
+| ⌃F / ⌃J (hold) | Glide the carriage left / right |
 
-滑行键没有用 Shift：Shift+F、Shift+J 就是大写的 F 和 J。要换成别的修饰键，改 `TypewriterView.glideModifier` 一处即可。
+The glide keys do not use Shift, because Shift-F and Shift-J are capital F and J. To use another
+modifier, change `TypewriterView.glideModifier`.
 
-### 设置（工具栏最右边的滑块图标）
+### Settings (the sliders icon at the right end of the toolbar)
 
-| 界面上的名字 | 作用 |
+| Name | What it does |
 |---|---|
-| Lamp | 台灯亮度 |
-| Night | 夜色：没被灯照到的地方有多亮 |
-| Volume | 音量 |
-| Output | 声音正送往哪个设备（只显示；要换设备，点菜单栏的声音图标） |
-| Sound | 选哪一套声音 |
-| Size | 字号 |
-| Travel | 走纸方式：Lamp moves（灯走）/ Paper moves（纸走） |
-| Delete | 退格方式：Tape（修正带）/ Strike out（划掉）/ Overtype（叠打） |
-| Chinese font | 中文字体：FangSong / Song / Kai |
-| Return automatically… | 写到行尾自动换行 |
-| Dust in the lamplight | 灯光里的浮尘 |
+| Lamp | Brightness of the lamp |
+| Night | How bright everything outside the lamp's light is |
+| Volume | Volume |
+| Output | Which device the sound is going to (display only; to change it, use the Sound menu in the menu bar) |
+| Sound | Which sound pack to use |
+| Size | Text size |
+| Travel | Lamp moves / Paper moves: whether the carriage travels along the paper or the paper slides under it |
+| Delete | Tape (correction tape) / Strike out / Overtype |
+| Chinese font | FangSong / Song / Kai |
+| Return automatically… | Wrap at the end of a line |
+| Dust in the lamplight | Dust drifting in the light |
 
-## 声音
+## Sound
 
-敲击、空格、换行、删除、铃声都取自真实打字机的录音，切成单个声音后做成"声音包"，
-放在 `Resources/Sounds/`。现在有四套，另有一套程序合成的作备用：
+The strike, space bar, carriage return, backspace and bell are cut from recordings of real
+typewriters and gathered into sound packs in `Resources/Sounds/`. There are four, and a
+synthesised set as a fallback:
 
-| 声音包 | 来源 | 特点 |
+| Pack | Source | Character |
 |---|---|---|
-| Hermes · Natural | Hermes Precisa 305 手动打字机 | 很脆、很亮 |
-| Hermes · ASMR | 同上，做了近讲处理 | 补了厚度，压掉刺耳的高频，把按键行程等细节提到前面 |
-| Classic · Natural | 另一台机械打字机（来源未注明型号） | 更厚、更沉 |
-| Classic · ASMR | 同上，做了近讲处理 | 更贴耳、更柔和；铃声和换行借用 Hermes 的录音 |
-| Synthesised | 程序生成 | 备用 |
+| Hermes · Natural | A Hermes Precisa 305 manual typewriter | As recorded: short, bright strikes |
+| Hermes · ASMR | The same machine, processed for a close sound | More body in the low mids, less harsh treble; key travel and other small sounds brought forward |
+| Classic · Natural | Another mechanical typewriter (its model is not named by the source) | As recorded: lower and heavier than the Hermes |
+| Classic · ASMR | The same machine, processed in the same way | Closer and softer; its bell and carriage return are borrowed from the Hermes recordings |
+| Synthesised | Generated by the program | Fallback |
 
-默认用的是 **Hermes · ASMR**。
+The default is **Hermes · ASMR**.
 
-试听：用浏览器打开 `docs/sound-samples.html`，里面有每一套的整段演示和单个声音。
-在 App 里换：设置 → Sound。
+To hear them, open `docs/sound-samples.html` in a browser: it has a full demonstration and the
+single sounds of each pack. To change the pack in the app: Settings → Sound.
 
-每个敲击样本都从按键开始下压算起，录音里字锤落纸的那一刻和画面上字杆敲到纸的那一刻对齐。
+Every strike sample begins as the key starts to go down, so that the moment of impact in the
+recording coincides with the slug reaching the paper on screen.
 
-录音来源和授权：
+Sources and licences:
 
-- 四套声音包，以及 `SoundSources/hermes-precisa-305/` 里的原始录音：Joseph Sardin 录制，
-  [BigSoundBank.com](https://bigsoundbank.com)，CC0（公有领域）。
-- `SoundSources/erika-5/typing.mp3`（1940 年的 Erika 5，只作参考，没有用进 App；试听页里嵌有同一段）：
-  Work With Sounds / Konrad Gutkowski，[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:WWS_Typewriter.ogg)，
-  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)，未作改动。
+- The four packs, and the original recordings in `SoundSources/hermes-precisa-305/`: recorded by
+  Joseph Sardin, [BigSoundBank.com](https://bigsoundbank.com), CC0 (public domain).
+- `SoundSources/erika-5/typing.mp3` (an Erika 5 from 1940; for reference only, not used in the
+  app; the same clip is embedded in the sample page): Work With Sounds / Konrad Gutkowski,
+  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:WWS_Typewriter.ogg),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unmodified.
 
-原始录音在 `SoundSources/`。改了切分或处理方式后，在项目文件夹里重新生成声音包和试听页：
+The original recordings are in `SoundSources/`. After changing how they are cut or processed,
+rebuild the packs and the sample page from the project folder:
 
 ```bash
 .build/release/Lamplight --build-packs
 ```
 
-## 数据在哪里
+## Where your writing is kept
 
-全部存在自己的 Mac 上，不联网：
+All of it on your own Mac, nothing online:
 
 ```
 ~/Library/Application Support/Lamplight/Entries/
 ```
 
-每张稿纸一个 JSON 文件，例如 `diary-2026-11-17-4D717AD1.json`。文件里记的是每一次敲击
-（哪个字、在哪一格、什么颜色、敲得多重），所以叠打、划掉这些痕迹都能原样保留。
-要拿到纯文本，用 ⌘E 导出。在抽屉里右键可以把一张纸移到废纸篓。
-只打了日期、没写内容的纸不会保存。
+One JSON file per sheet, for example `diary-2026-11-17-4D717AD1.json`. The file records every
+strike — which character, in which cell, in which colour, how hard — so overtyping and
+strike-outs are kept exactly as they were made. For plain text, export with ⌘E. Right-click a
+sheet in the drawer to move it to the Trash. A sheet with only the date on it is not saved.
 
-## 项目结构
+## Project layout
 
 ```
 Sources/Lamplight/
-  main.swift                入口；也处理下面的开发用参数
-  Model/Entry.swift         稿纸的数据：字格、敲击、导出文本
-  Model/Store.swift         读写 JSON 文件
-  Scene/TypewriterScene.swift  整台机器：纸、打字头、字杆、灯，以及把按键变成敲击的时序
-  Scene/Glyphs.swift        把字体变成色带墨迹；一行一行地画到纸上
-  Scene/Art.swift           所有机器零件的贴图（程序绘制）
-  Scene/Shaders.swift       纸纹、背景和灯光的着色器
-  Scene/Layout.swift        所有尺寸，随窗口大小缩放
-  Audio/SoundBank.swift     载入声音包，低延迟播放；输出设备变化后自己恢复
-  Audio/AudioDevices.swift  查询系统的声音设备（设置里显示的"Output"）
-  Audio/Synth.swift         程序合成的备用声音
-  App/                      窗口、键盘和输入法、工具栏、抽屉、设置
-  Dev/                      开发用：离屏渲染、演示影片、样例数据、窗口截图、声音包的制作工具
-Sources/ObjCSafe/           几行 Objective-C：接住音频框架抛出的异常，免得 App 闪退
-Resources/Sounds/           做好的声音包（打包进 App）
-SoundSources/               原始录音
-scripts/build.sh            构建并打包成 build/Lamplight.app（那一份正开着时不替换；加 --wait 则等它退出后换上）
-scripts/make_icon.sh        用场景本身重画图标
+  main.swift                   Entry point; also handles the developer options below
+  Model/Entry.swift            A sheet: the grid, the strikes, exporting text
+  Model/Store.swift            Reading and writing the JSON files
+  Scene/TypewriterScene.swift  The whole machine: paper, carriage, typebars, lamp, and the
+                               timing that turns keys into strikes
+  Scene/Glyphs.swift           Turns fonts into ribbon ink; draws the page a row at a time
+  Scene/Art.swift              Textures for every part of the machine, drawn by the program
+  Scene/Shaders.swift          Shaders for the paper grain, the backdrop and the light
+  Scene/Layout.swift           Every measurement, scaled to the window
+  Audio/SoundBank.swift        Loads sound packs and plays them with low latency; recovers by
+                               itself when the output device changes
+  Audio/AudioDevices.swift     Asks the system about sound devices (the "Output" row in Settings)
+  Audio/Synth.swift            The synthesised fallback sounds
+  App/                         Window, keyboard and input methods, toolbar, drawer, settings
+  Dev/                         Developer tools: offscreen rendering, the demo film, sample data,
+                               window capture, building the sound packs
+Sources/ObjCSafe/              A few lines of Objective-C that catch the exceptions the audio
+                               framework throws, so the app does not crash
+Resources/Sounds/              The finished sound packs (bundled into the app)
+SoundSources/                  The original recordings
+scripts/build.sh               Builds and wraps build/Lamplight.app (never replaces that copy
+                               while it is running; with --wait, swaps it in once it has quit)
+scripts/make_icon.sh           Redraws the icon from the scene itself
 ```
 
-## 开发用的工具
+## Developer tools
 
-不开窗口，把场景渲染成 PNG（检查某一瞬间的画面，比如字杆敲到纸上的那一帧）：
+Render the scene to PNG files without opening a window, to check exactly what is on screen at a
+given moment — the frame in which a typebar meets the paper, say:
 
 ```bash
 .build/release/Lamplight --render-test /tmp/lamplight-shots
 ```
 
-可以只渲染某几个场景，或换窗口尺寸：`... --render-test <目录> --size 1000x700 hero strike`。
-场景名：`intro hero close strike cjk return red fade glide torch lights papermoves scroll`。
-`glide` 除了出图，还逐帧打印打字头被拖动、滑行时的位置数据（每帧最大位移、位移的最大变化、有没有倒退）
-和最后落在第几格。
+You can render only some scenarios, or at another window size:
+`... --render-test <folder> --size 1000x700 hero strike`.
+The scenarios are `intro hero close strike cjk return red fade glide torch lights papermoves scroll`.
+`glide` also prints, frame by frame, how the carriage moved while it was dragged and glided (the
+largest step between frames, the largest change of step, any step backwards) and the cell it
+came to rest in.
 
-重拍 README 顶上的演示（离屏渲染，不开窗口、不出声；音轨用声音包的录音离线混成）：
+Remake the film at the top of this page. It is rendered offscreen — nothing is opened, nothing is
+played — and its soundtrack is mixed from the sound pack's recordings:
 
 ```bash
 .build/release/Lamplight --make-demo /tmp/lamplight-demo
 ```
 
-它写出 `demo.mp4`（60 帧、带声音）和一组小图，并打印把小图压成 `demo.webp` 的那条 `img2webp` 命令
-（`img2webp` 来自 Homebrew 的 `webp`）。演的内容和镜头在 `Dev/DemoFilm.swift` 里。
+It writes `demo.mp4` (60 frames a second, with sound) and a set of small frames, and prints the
+`img2webp` command that turns those into `demo.webp` (`img2webp` comes with Homebrew's `webp`).
+What is performed, and the camera, are in `Dev/DemoFilm.swift`.
 
-把所有合成的声音导出成 WAV，并打印音量：
+Write every synthesised sound to WAV files and print their levels:
 
 ```bash
 .build/release/Lamplight --dump-sounds /tmp/lamplight-sounds
 ```
 
-试用时不想碰真实的稿纸、也不想出声，用这两个环境变量：
+To try the app without touching your real sheets and without making a sound, use these two
+environment variables:
 
 ```bash
-LAMPLIGHT_DATA_DIR=/tmp/lamplight-data LAMPLIGHT_MUTE=1 build/Lamplight.app/Contents/MacOS/Lamplight --demo "自动打出这句话"
+LAMPLIGHT_DATA_DIR=/tmp/lamplight-data LAMPLIGHT_MUTE=1 build/Lamplight.app/Contents/MacOS/Lamplight --demo "This sentence types itself"
 ```
 
-其他参数：`--seed-demo <目录>` 生成几张样例稿纸；`--keys "abc<ret><del>"` 发送真实按键事件
-（`<glide-left:0.4>` / `<glide-right:0.4>` 是按住 ⌃F / ⌃J 那么多秒再松开）；
-`--drag "-20:0.5@4"` 在第 4 秒按住打字头、0.5 秒内向左拖 20 格再松手（真实的鼠标事件）；
-`--pointer "0.35,0.4@5"` 在第 5 秒把指针移到窗口的那个位置（宽、高的比例），并打印它静止后的处理；
-`--carriage-log` 每 0.05 秒打印打字头的位置和光标所在的格；
-`--capture <文件> --capture-at <秒>` 让 App 给自己的窗口拍照（`--capture-at 4,6.5` 拍多张）；`--profile` 退出前打印帧率；
-`--no-activate` 启动时不抢键盘焦点；`--quit-after <秒>` 自动退出；
-`--sound-pack <包名>` 指定声音包；`--record-audio <文件>` 把 App 实际播放的声音录下来（静音时也能录）；
-`--audio-log` 退出前打印声音引擎经历过的启动、停止和设备变化；
-`--audio-flap "设备名@秒,设备名@秒"` 在指定时刻把输出切到别的设备，检查声音能否自己恢复；
-`--english-header <稿纸.json>` 把一张旧日记顶上的中文日期改打成英文（只在那一行确实是机器打的日期时才动）。
+Other options:
 
-所有 `--` 开头的试用参数都必须和 `LAMPLIGHT_DATA_DIR` 一起用，否则程序拒绝启动——这样试用永远碰不到
-真正的日记。另外两个环境变量：`LAMPLIGHT_AUDIO_DEVICE="MacBook Pro Speakers"` 让试用的声音走指定设备
-（不去碰正戴着的耳机），`LAMPLIGHT_AUDIO_IDLE=2` 把"空闲多久释放声音设备"缩短到 2 秒。
+- `--seed-demo <folder>` writes a few sample sheets.
+- `--keys "abc<ret><del>"` sends real key events. `<glide-left:0.4>` and `<glide-right:0.4>` hold
+  ⌃F / ⌃J for that many seconds and let go.
+- `--drag "-20:0.5@4"` presses on the carriage at second 4, drags it 20 cells to the left in half
+  a second and lets go, with real mouse events.
+- `--pointer "0.35,0.4@5"` moves the pointer to that point of the window (fractions of its width
+  and height) at second 5, and prints what becomes of it once it rests.
+- `--carriage-log` prints where the carriage is, and the cursor's cell, every 0.05 seconds.
+- `--capture <file> --capture-at <seconds>` has the app photograph its own window
+  (`--capture-at 4,6.5` for several pictures).
+- `--profile` prints the frame rate before quitting.
+- `--no-activate` starts without taking keyboard focus; `--quit-after <seconds>` quits by itself.
+- `--sound-pack <id>` chooses a sound pack.
+- `--record-audio <file>` records what the app actually plays (it works while muted).
+- `--audio-log` prints, before quitting, every start, stop and device change the sound engine went through.
+- `--audio-flap "Device@seconds,Device@seconds"` moves the output to another device at those
+  moments, to check that the sound recovers by itself.
+- `--english-header <sheet.json>` retypes an old diary sheet's Chinese date line in English (only
+  if that line really is the date the machine typed).
 
-不用耳朵检查声音的几个工具：`--audio-scan <文件>` 列出录音里的每一个声音及其响度、长度、明暗；
-`--spectrogram <文件> <起点秒> <长度秒> <输出.png>` 把声音画成频谱图；
-`--audio-trace <文件> <起点秒> <长度秒>` 打印逐 10 毫秒的电平；
-`--audio-balance <文件>` 报告整段的频段分布和响度。
+Every option that begins with `--` must be used together with `LAMPLIGHT_DATA_DIR`; otherwise the
+program refuses to start, so that a trial run can never touch a real diary. Two more environment
+variables: `LAMPLIGHT_AUDIO_DEVICE="MacBook Pro Speakers"` sends a trial run's sound to a named
+device (leaving alone whatever headphones are being worn), and `LAMPLIGHT_AUDIO_IDLE=2` shortens
+the time before an idle sound device is released to 2 seconds.
 
-## 听不到声音时
+Tools for checking sound without ears: `--audio-scan <file>` lists every sound in a recording with
+its loudness, length and brightness; `--spectrogram <file> <start> <length> <output.png>` draws it
+as a spectrogram; `--audio-trace <file> <start> <length>` prints the level every 10 milliseconds;
+`--audio-balance <file>` reports the band shares and loudness of the whole recording.
 
-1. 打开设置看 **Output**：Lamplight 的声音总是送往 Mac 当前选中的输出设备。
-2. 如果那里写的是 AirPods 这类同时连着手机的耳机：耳机的声音一次只归一台设备。手机把它拿走以后，
-   Mac 上仍然显示选的是耳机，但 Mac 播放的任何声音都到不了耳朵。点菜单栏的声音图标重新选一次耳机，
-   或者改选"MacBook Pro 扬声器"。
-3. 别的 App 一打开耳机的麦克风，AirPods 会切到通话模式约两秒再切回来，这期间声音会断一下、音质变差。
-   想避免：系统设置 → 声音 → 输入，选"MacBook Pro 麦克风"。
+## If there is no sound
 
-2026-11-17 修过一个相关的 bug：以前只要输出设备变化一次（上面第 3 条每次都算），Lamplight 就一直
-没声，直到重开。现在会在几十毫秒内自己恢复。
+1. Open the settings and look at **Output**: Lamplight always plays to the Mac's current output
+   device.
+2. If that is a pair of headphones that is also connected to a phone — AirPods, say — their sound
+   belongs to one device at a time. Once the phone has taken them, the Mac still lists them as its
+   output, but nothing a Mac app plays reaches your ears. Choose the headphones again from the
+   Sound menu in the menu bar, or choose the Mac's own speakers.
+3. Whenever any app opens the headphones' microphone, AirPods drop into call mode for about two
+   seconds and come back; the sound cuts out for a moment and its quality falls. To avoid that:
+   System Settings → Sound → Input, and choose the Mac's own microphone.
 
-## 目前的状况
+A related bug was fixed on 2026-11-17. Until then, once the output device had changed a single
+time (every occurrence of item 3 counts), Lamplight stayed silent until it was relaunched. It now
+recovers by itself within a few tens of milliseconds.
 
-已经验证的：
+## Status
 
-- 画面：整体、敲击逐帧、换行、红色色带、修正带、开灯、纸走模式、回看、三种窗口尺寸。
-- 真实 App：启动、按键输入（含 Return / Delete / Tab / 方向键）、抽屉、设置面板、保存后重开接着写。
-- 拖动和滑行（2026-11-17）：用真实的鼠标、按键事件在真窗口里跑过。拖 30 格用 0.4 秒时打字头全程跟手
-  （停下时落后指针 0.04 格），每帧位移的变化不超过 0.08 格，没有倒退；按住滑行 0.72 秒到页边，松键后
-  不窜、不回弹；滑行时约 120 帧，每帧逻辑耗时约 0.1 毫秒。滑过每一格的那声轻响用的是方向键的同一个声音、
-  调轻了 5–10 分贝、每秒最多 25 声——这是量出来的，好不好听还没有人听过。
-- 指针静止 6 秒隐去：计时（最后一次移动后 6.00 秒）和那片光的熄灭用截图量过；指针本身的隐藏只在
-  App 是当前活动窗口时才做，测试启动不抢焦点，所以这一步没有被看见过。
-- 帧率：在这台 M5 MacBook 上连续打字时约 120 帧，每帧逻辑耗时平均不到 1 毫秒。
-- 声音引擎：打字过程中把输出设备切走再切回（共 4 次），每次 28–65 毫秒内恢复，215 个声音只丢 2 个；
-  空闲释放后由按键唤醒约 35 毫秒，不丢音。这些是用录音和日志量出来的，不是听出来的。
+Verified:
 
-还没有验证的：
+- Picture: the whole scene, a strike frame by frame, the carriage return, the red ribbon, the
+  correction tape, lights on, paper-moves mode, reading back, three window sizes.
+- The real app: launching, typing (including Return, Delete, Tab and the arrow keys), the drawer,
+  the settings panel, and carrying on with a saved sheet after reopening.
+- Dragging and gliding (2026-11-17): run in the real window with real mouse and key events.
+  Dragged 30 cells in 0.4 seconds, the carriage stays with the pointer throughout (0.04 cells
+  behind when it stops), its step changes by no more than 0.08 cells from one frame to the next,
+  and it never moves backwards. Gliding reaches the margin in 0.72 seconds, and neither surges nor
+  bounces when the key is released. About 120 frames a second while gliding, with about 0.1 ms of
+  logic per frame. The click on passing each cell is the arrow-key sound, 5–10 dB quieter and at
+  most 25 a second — that is measured; nobody has yet judged it by ear.
+- The pointer hiding after 6 seconds of rest: the timing (6.00 seconds after the last movement)
+  and the light going out were measured from screenshots. The pointer itself is only hidden while
+  the app is the active window, and test launches do not take focus, so that step has not been seen.
+- Frame rate: about 120 frames a second during continuous typing on an M5 MacBook, with less than
+  1 ms of logic per frame on average.
+- Sound engine: with the output device switched away and back four times during typing, it
+  recovered within 28–65 ms each time and dropped 2 of 215 sounds; woken by a key after being
+  released for idleness, it takes about 35 ms and drops nothing. These were measured from
+  recordings and logs, not heard.
 
-- **声音只被粗略地听过。** 录音本身是真实打字机，但切分、音量搭配和"ASMR"处理都是照着
-  频谱图和测量数据做的，没有靠耳朵一个个调。四套里默认用的 Hermes · ASMR 是试听之后选的；
-  其余几套、以及处理得是否过头，还需要人来听。处理参数在 `Dev/PackRecipes.swift`。
-- **演示影片的音轨**是用同一套录音离线混的，没有和 App 里实际播放的声音逐一对照着听过。
-- **真实的蓝牙切换还没有被观察过。** 修复之后声音确认恢复了，模拟的设备切换也都通过。但别的 App
-  打开麦克风、手机把耳机拿走再还回来时是否每次都能自己恢复，要戴着耳机用一段时间才知道。
-- **拖动、滑行时的那声轻响**没有人听过（见上）；**指针静止后隐藏**这一步没有被看见过（见上）。
-- **中文输入法的组字过程**（拼音还没选字的阶段）只在离屏渲染里模拟过，没有用真实输入法操作过。
-- 没有在外接显示器、非 120Hz 屏幕上跑过。
+Not yet verified:
 
-## 这台机器的一点设定
+- **The sound has only been judged roughly.** The recordings are of real typewriters, but the
+  cutting, the balance of levels and the "ASMR" processing were done from spectrograms and
+  measurements, not tuned one by one by ear. The default pack, Hermes · ASMR, was chosen after
+  listening; the others, and whether the processing goes too far, still need ears. The processing
+  is in `Dev/PackRecipes.swift`.
+- **The film's soundtrack** is mixed offline from the same recordings, and has not been compared by
+  ear with what the app actually plays.
+- **A real Bluetooth switch has not been observed.** After the fix the sound was confirmed to be
+  back, and every simulated device switch passed. Whether it recovers every time another app opens
+  the microphone, or a phone takes the headphones and gives them back, will only be known after
+  some time of use with headphones on.
+- **The click while dragging and gliding** has not been heard, and **the pointer hiding after it
+  rests** has not been seen (see above).
+- **Composing with a Chinese input method** — the stage where pinyin is typed but no character is
+  chosen yet — has only been simulated in offscreen rendering, not operated with a real input method.
+- It has not been run on an external display or on a screen that is not 120 Hz.
 
-- 一行 60 格，西文一格、中文两格。
-- 每个字的位置、歪斜、墨色深浅都略有不同，由敲击时生成的随机数决定并存进文件，重开不会变。
-- 没有撤销。打字机没有这个键。
+## A few facts about this machine
+
+- A line is 60 cells. Latin characters take one cell, Chinese characters two.
+- Every character sits, tilts and takes ink slightly differently. That is decided by random
+  numbers at the moment of the strike and saved in the file, so it does not change when a sheet
+  is reopened.
+- There is no undo. A typewriter has no such key.

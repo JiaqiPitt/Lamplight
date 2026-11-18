@@ -136,8 +136,9 @@ If silence is reported again, read the logs before changing code:
 
 ## The front page
 
-The repository is public, and its README opens with a film of the app (asked for by the owner:
-"a very good demo … that shows the whole effect at a glance").
+The repository is public (github.com/JiaqiPitt/Lamplight), and its README opens with a film of the
+app (asked for by the owner: "a very good demo … that shows the whole effect at a glance").
+The README is written entirely in English, at the owner's request; so is the sound sample page.
 
 - `Lamplight --make-demo <dir>` (run from the project folder) makes it: `demo.mp4`, 60 frames a
   second with sound, and the frames for `docs/demo.webp`, which is encoded with the `img2webp`

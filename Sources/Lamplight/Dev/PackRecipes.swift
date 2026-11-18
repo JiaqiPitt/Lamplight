@@ -202,12 +202,12 @@ extension PackBuilder {
                 return DSP.concat(parts)
             }
             let pieces: [(String, Clip)] = [
-                ("整段演示", demo(takes, strikeLead: lead)),
-                ("敲击", sequence(Array(struck.prefix(5)), gap: 0.55)),
-                ("空格", sequence(Array(spaces.prefix(3)), gap: 0.7)),
-                ("换行", sequence([takes["carriage3"]![0]], gap: 1.3)),
-                ("删除", sequence(Array(backs.prefix(3)), gap: 0.7)),
-                ("铃", sequence([bellClips[0]], gap: 1.6)),
+                ("Full demo", demo(takes, strikeLead: lead)),
+                ("Strike", sequence(Array(struck.prefix(5)), gap: 0.55)),
+                ("Space bar", sequence(Array(spaces.prefix(3)), gap: 0.7)),
+                ("Carriage return", sequence([takes["carriage3"]![0]], gap: 1.3)),
+                ("Backspace", sequence(Array(backs.prefix(3)), gap: 0.7)),
+                ("Bell", sequence([bellClips[0]], gap: 1.6)),
             ]
             var files: [(String, URL)] = []
             for (n, (label, clip)) in pieces.enumerated() {
@@ -224,15 +224,15 @@ extension PackBuilder {
     /// One self-contained page with a play button for every sample.
     static func writePage(_ demos: [(id: String, name: String, files: [(label: String, url: URL)])]) {
         let notes = [
-            "hermes": "Hermes Precisa 305 的原始录音。很脆、很亮，“嗒、嗒”的金属感。",
-            "hermes-asmr": "同一台机器，做了近讲处理：补了低频的厚度，压掉刺耳的高频，把按键行程、回弹这些细小声音提到前面。",
-            "classic": "另一台机械打字机的原始录音。更厚、更沉，每一下都有“咚”的底。",
-            "classic-asmr": "同上，做了近讲处理：更贴耳、更柔和，轻重更均匀。铃声和换行借用 Hermes 的录音。",
+            "hermes": "A Hermes Precisa 305, as recorded: short, bright, metallic strikes.",
+            "hermes-asmr": "The same machine, processed for a close sound: more body in the lows, the harsh treble taken down, and small sounds such as key travel and the key's return brought forward.",
+            "classic": "Another mechanical typewriter, as recorded: lower and heavier, with a thud under every strike.",
+            "classic-asmr": "The same machine, processed in the same way: closer and softer, with more even strikes. Its bell and carriage return are borrowed from the Hermes recordings.",
         ]
         var html = """
         <!doctype html>
-        <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lamplight 声音试听</title>
+        <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lamplight sound samples</title>
         <style>
         :root { color-scheme: dark; }
         body { background: #0d0c0b; color: #e6dfcf; font: 15px/1.6 -apple-system, "PingFang SC", sans-serif; margin: 0; padding: 32px 16px 64px; }
@@ -243,12 +243,12 @@ extension PackBuilder {
         h2 { font-size: 17px; margin: 0 0 4px; color: #edb96b; font-weight: 600; }
         section > p { color: #a49c8c; margin: 0 0 14px; font-size: 13.5px; }
         .row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-        .row span { width: 76px; flex: none; color: #cfc7b6; font-size: 13.5px; }
+        .row span { width: 112px; flex: none; color: #cfc7b6; font-size: 13.5px; }
         audio { flex: 1; min-width: 220px; height: 34px; }
         footer { color: #7d766a; font-size: 12.5px; margin-top: 26px; }
         </style></head><body><main>
-        <h1>Lamplight 声音试听</h1>
-        <p class="lead">四套声音都来自真实打字机的录音。建议戴耳机听。先听每套的“整段演示”，再细听单个声音。在 App 里换声音：设置 → Sound。</p>
+        <h1>Lamplight sound samples</h1>
+        <p class="lead">All four sets are recordings of real typewriters. Headphones are recommended. Listen to each set's full demo first, then to the single sounds. To change the sound in the app: Settings → Sound.</p>
 
         """
         for (n, d) in demos.enumerated() {
@@ -264,15 +264,15 @@ extension PackBuilder {
         let erika = sources.appendingPathComponent("erika-5/typing.mp3")
         if let data = try? Data(contentsOf: erika) {
             html += """
-            <section><h2>参考：Erika 5（1940 年）原始录音</h2>
-            <p>这是一台 1940 年的机器。这段录音是连续快打，而且是低码率的有损音质，切不出干净的单个按键，所以没有做成声音包。放在这里作参考：更老的机器是这样的声音。</p>
-            <div class="row"><span>原始录音</span><audio controls preload="auto" src="data:audio/mpeg;base64,\(data.base64EncodedString())"></audio></div>
+            <section><h2>For reference: an Erika 5 from 1940, as recorded</h2>
+            <p>A machine from 1940. The recording is continuous fast typing at a low bit rate, so no clean single keystrokes can be cut from it, and it was not made into a pack. It is here for reference: this is what an older machine sounds like.</p>
+            <div class="row"><span>Recording</span><audio controls preload="auto" src="data:audio/mpeg;base64,\(data.base64EncodedString())"></audio></div>
             </section>
 
             """
         }
         html += """
-        <footer>第 1–4 套的录音：Joseph Sardin，BigSoundBank.com，CC0 授权。Erika 5 的录音：Work With Sounds / Konrad Gutkowski，Wikimedia Commons，CC BY 4.0 授权。<br>“整段演示”模拟的是在 App 里打一行字、改一处错、铃响、换行的过程。在 App 里也可以直接换：移动鼠标 → 工具栏最右边的滑块图标 → Sound。</footer>
+        <footer>The recordings for sets 1–4: Joseph Sardin, BigSoundBank.com, CC0. The Erika 5 recording: Work With Sounds / Konrad Gutkowski, Wikimedia Commons, CC BY 4.0.<br>The full demo imitates typing a line in the app, correcting a slip, the bell, and a carriage return. The sound can also be changed in the app: move the pointer → the sliders icon at the right end of the toolbar → Sound.</footer>
         </main></body></html>
         """
         // The page carries its own copies of the clips; the loose files are no longer needed.
